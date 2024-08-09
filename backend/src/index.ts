@@ -7,5 +7,6 @@ app.get('/', (c) => {
 })
 
 app.post("/api/v1/signup",)
+app.post("/api/v1/signin")
 
 export default app
