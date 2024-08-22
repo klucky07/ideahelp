@@ -1,30 +1,75 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react"
-import { Link } from "react-router-dom"
-import {SignupType} from "../../../commons/src/index"
-
+import { Link, useNavigate } from "react-router-dom"
+import { SignupType } from "../../../commons/src/index"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
-    const [postinputs,setPostinputs]=useState<SignupType>({
-        name:"",
-        email:"",
-        password:""
+    const navigate=useNavigate();
+    const [postinputs, setPostinputs] = useState<SignupType>({
+        name: "",
+        email: "",
+        password: ""
     })
+
+    async function SendRequest(){
+       try{
+        const response=await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup"?"signup":"signin"}`,postinputs)
+       const jwt =response.data;
+       localStorage.setItem("token",jwt);
+       navigate("/blogs")
+    }catch(e){
+        alert("error")
+       }
+    }
     return <div className="h-screen flex justify-center flex-col">
-       
+
         <div className="flex justify-center">
-            <div>
-                <div className="font-bold text-3xl">
+            <div >
+                <div className="font-extrabold text-3xl px-5">
                     Create an Account
                 </div>
-                <div className="text-slate-400 pl-1  font-semibold">
-                    Already have an account?<Link to={"/signin"} className="underline pl-2 ">Login</Link>;
+                <div className="text-slate-400  px-6 font-semibold">
+                   {type==="signin"?"Dont have an account?" :"Already have an account?"}
+                   <Link to={type==="signin"?"/signup":"/signin"} className="underline pl-2 ">
+                   {type==="signin"?"Sign up":"Sign in"}
+                   </Link>;
 
                 </div>
-              <LabeledInput label="Username" placeholder="USername" onChange={(e)=>{
-                setPostinputs(c=>({
-                    ...c,
-                    name:e.target.value
-                }))
-              }}/>
+                <div className="pt-4">
+                    <div className="pt-2">
+                        {type==="signup"? <LabeledInput label="Username" placeholder="Enter Username" onChange={(e) => {
+                            setPostinputs(c => ({
+                                ...c,
+                                name: e.target.value
+                            }))
+                        }} />:null}
+                    </div>
+                    <div className="pt-2">
+                        <LabeledInput label="Email" placeholder="Enter email" onChange={(e) => {
+                            setPostinputs(c => ({
+                                ...c,
+                                email: e.target.value
+                            }))
+                        }} />
+
+                    </div>
+                    <div className="pt-2">
+                        <LabeledInput label="Password" type={"password"} placeholder="Enter Password" onChange={(e) => {
+                            setPostinputs(c => ({
+                                ...c,
+                                password: e.target.value
+                            }))
+                        }} />
+
+                    </div>
+                    <div className="pt-5">
+                    <button onClick={SendRequest} type="button" className="text-white w-full  bg-gradient-to-br from-gray-900 to-gray-700 hover:bg-gradient-to-bl focus:ring-2 focus:outline-none focus:ring-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                      {type === "signup"?"Sign up" : "Sign in"}
+                        </button>
+                    </div>
+                    
+                </div>
+
 
             </div>
 
@@ -35,14 +80,15 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     </div>
 }
 
-interface LabeledInputType{
-label:string,
-placeholder:string,
-onChange:(e:ChangeEvent<HTMLInputElement>)=>void
+interface LabeledInputType {
+    label: string,
+    placeholder: string,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    type?:string
 }
-function LabeledInput({label,placeholder,onChange}:LabeledInputType){
- return  <div>
- <label  className="block mb-2 pl-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
- <input type="text" id="first_name" onChange={onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} required />
-</div>
+function LabeledInput({ label, placeholder, onChange, type }: LabeledInputType) {
+    return <div>
+        <label className="block mb-2 pl-1 text-sm  font-bold text-gray-900 dark:text-black">{label}</label>
+        <input type={type ||"text" }id="first_name" onChange={onChange} className="bg-gray-100 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required />
+    </div>
 }

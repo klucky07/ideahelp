@@ -2,13 +2,16 @@ import { Auth } from "../components/Auth"
 import { Qoute } from "../components/Qoute"
 
 export const Signup =()=>{
-    return <div className="grid grid-cols-2">
+    return <div>
+<div className="grid grid-cols-1 md:grid-cols-2">
         <div>
-            <Auth/>
+            <Auth type={"signup"}/>
         </div>
         <div className="invisible md:visible">
         <Qoute/>
         </div>
        
     </div>
+    </div>
+     
     }
