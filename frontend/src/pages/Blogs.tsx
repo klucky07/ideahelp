@@ -21,7 +21,9 @@ import 'react-loading-skeleton'
      <Appbar/>
      <div className="flex justify-center">
  <div className="  max-w-xl">
-  {blogs.map(blog=> <BlogsCard authorName={blog.author.name||"anonymous"}
+  {blogs.map(blog=> <BlogsCard 
+  id={blog.id}
+  authorName={blog.author.name||"anonymous"}
          title={blog.title}
          content={blog.content}
          publishedDate="2nd feb 2024"/>)}
