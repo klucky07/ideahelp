@@ -1,8 +1,9 @@
-import Skeleton from "react-loading-skeleton"
+
 import { Appbar } from "../components/Appbar"
 import { BlogsCard } from "../components/BlogsCard"
+import { BlogSkeleton } from "../components/BlogSkeleton";
 import { useBlogs } from "../hooks"
-import 'react-loading-skeleton'
+
 
 
 
@@ -10,11 +11,17 @@ import 'react-loading-skeleton'
   const{loading,blogs}=useBlogs();
   if(loading){
     return <div>
-      loading...
-       <Skeleton height={20} />
-          <Skeleton circle={true} height={50} width={50} />
-          <Skeleton width={100} height={40} />
+      <div className="flex place-items-center justify-center min-h-screen">
+        <div className="">
+        <BlogSkeleton/>
+       <BlogSkeleton/>
+       <BlogSkeleton/>
+
+        </div>
+    
     </div>
+    </div>
+   
   }
      return <div>
 

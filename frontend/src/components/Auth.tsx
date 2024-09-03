@@ -3,19 +3,36 @@ import { Link, useNavigate } from "react-router-dom"
 import { SignupType } from "../../../commons/src/index"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
+import { BlogSkeleton } from "./BlogSkeleton"
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     const navigate=useNavigate();
+    const [loading,setLoading]=useState(false);
     const [postinputs, setPostinputs] = useState<SignupType>({
         name: "",
         email: "",
         password: ""
     })
+    if(loading){
+        return <div>
+        <div className="flex place-items-center justify-center min-h-screen">
+          <div className="">
+          <BlogSkeleton/>
+         <BlogSkeleton/>
+         <BlogSkeleton/>
+  
+          </div>
+      
+      </div>
+      </div>
+    }
 
     async function SendRequest(){
        try{
+        setLoading(true);
         const response=await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup"?"signup":"signin"}`,postinputs)
        const jwt =response.data.jwt;
        localStorage.setItem("token",jwt);
+       setLoading(false);
        navigate("/blogs")
     }catch(e){
         alert("error")
