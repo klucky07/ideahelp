@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { SignupType } from "../../../commons/src/index"
 import axios from "axios"
@@ -14,7 +14,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     async function SendRequest(){
        try{
         const response=await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup"?"signup":"signin"}`,postinputs)
-       const jwt =response.data;
+       const jwt =response.data.jwt;
        localStorage.setItem("token",jwt);
        navigate("/blogs")
     }catch(e){
