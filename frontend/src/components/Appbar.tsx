@@ -19,7 +19,7 @@ export const Appbar = ({type}:{type:'/'| '/*'}) => {
                           </Link>}  
             </div>
             <div>
-               {type==="/*" && <Link to={'/signup'}>
+               {type==="/*" && <Link to={'/'}>
                 <div onClick={()=>{
                     localStorage.removeItem('token');
                 }} className="underline underline-offset-4 decoration-slate-600  font-light pr-5 text-slate-700 ">
