@@ -10,7 +10,7 @@ return <div>
   <div className="flex justify-center w-full">
     <div className="flex flex-col space-y-48 justify-center items-center">
       <div className="animate-pulse">
-        <h1 className="text-6xl font-semibold bg-0">
+        <h1 className="text-6xl   font-semibold bg-0">
           Welcome, let's dive into thoughts!
         </h1>
       </div>

@@ -15,7 +15,7 @@ export const BlogsCard =(
 id}:BlogsCardProps
 )=>{
     return <Link to={`/blog/${id}`}>
-    <div className=" cursor-pointer border-b-2 border-r-2 m-2 pt-6 pb-2 max-w-screen-lg ">
+    <div className="pl-2 cursor-pointer border-b-2 scale-105 shadow-md border-r-2 m-2 pt-6 pb-2 max-w-screen-lg  ">
     
        <div className=" flex w-sceen">
         <div className="flex justify-center flex-col">

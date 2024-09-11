@@ -4,12 +4,12 @@ import { Avatar } from "./BlogsCard"
 
 export const Fullblog = ({blog}:{blog:Blog}) => {
     return <div>
-        <Appbar />
+        <Appbar type={"/*"} />
         <div className="flex justify-center">
 
         
         <div className="grid grid-cols-12 px-10 pt-14 m-2 w-full max-w-screen-xl">
-            <div className=" col-span-8">
+            <div className=" col-span-8 border-r-2">
                 <div className="text-4xl font-extrabold">
                     {blog.title}
 
@@ -22,7 +22,7 @@ export const Fullblog = ({blog}:{blog:Blog}) => {
                     {blog.content}
                 </div>
             </div>
-            <div className=" col-span-4 ">
+            <div className=" col-span-4 pl-4 ">
                 <div className="text-slate-600 text-lg">Author</div>
                 <div className="grid grid-cols-7">
 

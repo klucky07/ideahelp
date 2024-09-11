@@ -26,7 +26,7 @@ export const Blogs = () => {
   return <div>
 
     <Appbar type="/*" />
-    <div className=" pt-5">
+    <div className=" pt-5  ">
     <div className="flex   justify-center col-span-3">
       <div className="   max-w-xl">
         {blogs.map(blog => <BlogsCard
