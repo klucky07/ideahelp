@@ -3,10 +3,10 @@ import { Appbar } from "../components/Appbar"
 import { BACKEND_URL } from "../config"
 import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { CreatePostType } from "../../../commons/src"
+
 
 export const Publish=()=>{
-    const [inputs,setInputs]=useState<CreatePostType>({
+    const [inputs,setInputs]=useState({
         title:"",
         content:""
     });
