@@ -13,7 +13,7 @@ export const Publish=()=>{
     //const [description,setDescription]=useState("");
     const navigate=useNavigate();
     return <div>
-        <Appbar/>
+        <Appbar type={"/*"}/>
      <div className="flex justify-center">
    
      <div className="w-full max-w-screen-lg">

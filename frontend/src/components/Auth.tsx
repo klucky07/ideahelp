@@ -1,13 +1,13 @@
 import { ChangeEvent, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { SignupType } from "../../../commons/src/index"
+
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 import { BlogSkeleton } from "./BlogSkeleton"
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     const navigate=useNavigate();
     const [loading,setLoading]=useState(false);
-    const [postinputs, setPostinputs] = useState<SignupType>({
+    const [postinputs, setPostinputs] = useState({
         name: "",
         email: "",
         password: ""
